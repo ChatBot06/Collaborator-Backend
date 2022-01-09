@@ -1,7 +1,7 @@
 import express from "express";
 const router = express.Router();
 import {
-  authUser,
+  loginUser,
   registerUser,
   getUserProfile,
   updateUserProfile,
@@ -12,13 +12,10 @@ import {
 } from "../controllers/userController.js";
 import { protect, admin } from "../middleware/authMiddleware.js";
 
-/**
- * @swagger
- * get
- *  params
- */
-router.route("/").post(registerUser).get(getUsers);
-router.post("/login", authUser);
+
+router.route("/register").post(registerUser)
+
+router.post("/login", loginUser);
 router
   .route("/profile")
   .get(protect, getUserProfile)

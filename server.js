@@ -12,13 +12,14 @@ dotenv.config();
 import swaggerUi from 'swagger-ui-express';
 import logger from './config/winston.js';
 import swaggerFile from "./swagger_output.json"
-
-
 connectDB();
-
 
 const app = express();
 app.use(cors());
+
+
+
+
 if (process.env.NODE_ENV === "development") {
   app.use(morgan('combined', { stream: logger.stream }));
 }
@@ -27,6 +28,10 @@ app.use(express.json());
 
 app.use("/api/users", userRoutes);
 app.use("/api/todo", todoRoutes);
+
+const __dirname = path.resolve();
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
+
 
 app.get("/", (req, res) => {
   res.send("API is running....");
