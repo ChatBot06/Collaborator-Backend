@@ -8,9 +8,9 @@ const sendGridAPIKey = process.env.SENDGRID_API_KEY_NEW;
 const sendGridEmailSender = process.env.SENDGRID_SENDER_EMAIL
 sgMail.setApiKey(sendGridAPIKey);
 
-export const sendEmail = async (toEmail: string, subject: string, text: any, fromEmail: any = null, attachments: any = null, ccEmail: any = null) => {
+export const sendEmail = async (toEmail, subject, text, fromEmail = null, attachments = null, ccEmail = null) => {
     try {
-        const msg: any = {
+        const msg = {
             to: toEmail, // Change to your recipient
             // from: (!_.isNull(fromEmail)) ? fromEmail : sendGridEmailSender,
             from: {
